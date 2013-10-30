@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/jon/projects/KMIP/qtmkey/src'
+let g:netrw_dirhist_2='/home/jon/.vim'
+let g:netrw_dirhist_3='/home/jon/.vim/colors'
+let g:netrw_dirhist_4='/home/jon/projects/KMIP/lib/libkmip/test'
+let g:netrw_dirhist_5='/etc/systemd'
+let g:netrw_dirhist_6='/home/jupiter/window_manager/dwm_mod/dwm-6.0'

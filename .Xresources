@@ -1,0 +1,34 @@
+! Author: jupiter
+! Last edit: 2013/10/30
+
+urxvt*color0:           black
+urxvt*color1:           red3
+urxvt*color2:           green3
+urxvt*color3:           yellow3
+urxvt*color4:           blue3
+urxvt*color5:           magenta3
+urxvt*color6:           cyan3
+urxvt*color7:           antiquewhite
+
+urxvt*color8:           grey25
+urxvt*color9:           red
+urxvt*color10:          green
+urxvt*color11:          yellow
+urxvt*color12:          blue
+urxvt*color13:          magenta
+urxvt*color14:          cyan
+urxvt*color15:          white
+
+URxvt*depth:            32
+URxvt*background:	    [85]#1c041b
+!URxvt*background:	    [85]#0e090c	600f5d
+URxvt*foreground:	    #ffffff
+
+URxvt*font: 		    xft:DroidSansMono:pixelsize=11
+URxvt*saveLines:	    12000
+URxvt*scrollBar:	    false
+URxvt*cursorBlink: 	    true
+URxvt*reverseVideo:     false
+URxvt*fading:		    20
+
+URxvt.urlLauncher:      /usr/local/bin/firefox
