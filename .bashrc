@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Author: jupiter
-# Last Edit: 2013/10/25
+# Last Edit: 2013/12/24
 #
 # WARNING!! Many of these commands and settings are linux only!
 #
@@ -17,10 +17,12 @@ set -o vi
 # ALIAS
 # ============================================================
 alias cls='clear'          # clear
-alias rm='rm -I'           # remove ask for permision
+alias rm='rm -Iv'           # remove ask for permision
 alias mkdir='mkdir -p'     # make directory with parents
 alias ..='cd ..'           # go up one directory
 alias c-='cd -'            # go to last directory
+alias umount='umount -v'   # always verbose
+alias mount='mount -v'     # always verbose
 
 alias du='du -kh'          # folder usage (human readable)
 alias df='df -kTh'         # partition list and usage
@@ -43,7 +45,7 @@ alias ll="ls -lv --group-directories-first"
 alias lm='ll | more'       # Pipe through 'more'
 alias le='ll | less'       # pipe through 'less'
 alias lr='ll -R'           # Recursive ls.
-alias la='ll -A'           # Show hidden files.
+alias la='ll -Aa'           # Show hidden files.
 
 # tar alias's
 alias tart='tar tf'        # view contents of tar
@@ -52,6 +54,7 @@ alias tarc='tar cfv'       # create tar archive
 
 # other
 alias ebashrc='gvim ~/.bashrc'
+alias tty-clock='tty-clock -s -x  -c -C 5'
 
 # ============================================================
 # FUNCTION CMDS
@@ -69,9 +72,9 @@ function cdb () {
 }
 
 # change directory and list contents
-function cdl () { 
+function cdl () {
 
-    if [ -n $1 ] ; then 
+    if [ -n $1 ] ; then
         cd $1 && la
     fi
 }
@@ -81,7 +84,11 @@ function cmds () {
 
     CMDS="$HOME/adata/cmds"
     if [ -e $CMDS ] ; then
-        cat $CMDS | less
+        if [ $# -gt 0 ] ; then
+            cmds | grep $1
+        else
+            cat $CMDS | less
+        fi
     else
         echo there was an error. file must not exist
     fi
@@ -92,38 +99,23 @@ function acmds () {
 
     ACMD="$HOME/adata/cmds_arch"
     if [ -e $ACMD ] ; then
-        cat $ACMD | less
+
+        if [ $# -gt 0 ] ; then
+            acmds | grep $1
+        else
+            cat $ACMD | less
+        fi
     else
         echo there was an error. file must not exist
     fi
 }
 
-# search commands 
-function csrch () {
+function plutonium () {
 
+    cd $HOME/jupiter_data/cs_related/projects/libplutonium/
     if [ $# -gt 0 ] ; then
-        cmds | grep $1
-    else
-        echo bad search term $1
-    fi
-}
-
-# search arch specific commandjs
-function asrch () {
-
-    if [ $# -gt 0 ] ; then
-        acmds | grep $1
-    else
-        echo bad search term $1
-    fi
-}
-
-function qpro () {
-
-    cd $HOME/projects/KMIP/qtmkey
-    if [ $# -gt 0 ] ; then
-        if [ -e src/$1 ] ; then
-            gvim src/$1
+        if [ -e src/PLUTONIUM/$1 ] ; then
+            gvim src/PLUTONIUM/$1
         else
             echo "! file $1 does not exist"
             echo "--> cd to src directory"
@@ -136,10 +128,24 @@ function qpro () {
     fi
 }
 
-function libkmip () {
+function comnurse () {
 
-    cd $HOME/projects/KMIP/lib/libkmip
-    la
+    NURSE_DIR=$HOME/jupiter_data/cs_related/projects/nursing_simulation/com.regis.nursingsimulation/
+    if [ -d $NURSE_DIR ] ; then
+        cd $NURSE_DIR && la
+    else
+        echo -e "the directory:\n$NURSE_DIR\ndoes not exist"
+    fi
+    if [ $# -gt 0 ] ; then
+        if [ $1 == "ide" ] ; then
+            ~/jmonkeyplatform/bin/jmonkeyplatform
+            echo "use jmonkey as a job by ctrl-z && bg"
+        else
+            echo "$(tput setaf 1) ERROR! $(tput sgr0)unknown argument $(tput setaf 3)$1$(tput sgr0)"
+            echo "usage: comnurse ide"
+            echo "option ide will open the jmonkey ide"
+        fi
+    fi
 }
 
 # move a program or script to home/bin
@@ -191,7 +197,7 @@ function usb () {
 # BASH PROMPT STUFF
 #
 # TODO
-# number of files, and folder size 
+# number of files, and folder size
 # number of users currently logged into the system
 # history number of current command
 # ============================================================
@@ -257,8 +263,8 @@ BAK_LCYAN="\[\033[00;106m\]"
 BAK_WHITE="\[\033[00;107m\]"
 
 # PS1 VARS
-export PS1='[\h]$'
-export PS1="[ ${COL_WHITE}\t${COL_LGRAY} ] [ ${COL_CYAN}jobs: \j${COL_LGRAY} ] [ ${COL_CYAN}\w${COL_LGRAY} ]\n( \`if [ \$? = 0 ]; then echo \[\e[94m\]\$?\[\e[0m\]; else echo \[\e[91m\]\$?\[\e[00m\]; fi\` ) ${COL_CYAN}\u${COL_LGRAY}::${COLB_MAGENTA}\h ${COL_CYAN}$ ${NO_NONE}"
+#export PS1='[\h]$'
+export PS1="[ ${COLB_CYAN}\t${COL_LGRAY} ] [ ${COL_CYAN}jobs: ${COLB_LCYAN}\j${COL_LGRAY} ] [ ${COL_CYAN}\w${COL_LGRAY} ]\n( \`if [ \$? = 0 ]; then echo \[\e[94m\]\$?\[\e[0m\]; else echo \[\e[91m\]\$?\[\e[00m\]; fi\` ) ${COL_CYAN}\u${COL_LGRAY}::${COLB_MAGENTA}\h ${COL_CYAN}$ ${NO_NONE}"
 
 # export PS1='\e[s\e[0;0H\e[1;33m\h    \t\n\e[1;32mThis is my computer\e[u[\u@\h:  \w]\$ '
 export PS2="-->"

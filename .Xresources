@@ -7,20 +7,27 @@ urxvt*color2:           green3
 urxvt*color3:           yellow3
 urxvt*color4:           blue3
 urxvt*color5:           magenta3
-urxvt*color6:           cyan3
+urxvt*color6:           #8abed6
+!urxvt*color6:           cyan3
 urxvt*color7:           antiquewhite
 
 urxvt*color8:           grey25
-urxvt*color9:           red
-urxvt*color10:          green
+urxvt*color9:           #ab4690
+!urxvt*color9:           red
+urxvt*color10:          #98f687
+!urxvt*color10:          green
 urxvt*color11:          yellow
-urxvt*color12:          blue
-urxvt*color13:          magenta
-urxvt*color14:          cyan
+urxvt*color12:          #65a8ae
+!urxvt*color12:          blue
+urxvt*color13:          #f487f6
+!urxvt*color13:          magenta
+urxvt*color14:          #a488b8
+!urxvt*color14:          cyan
 urxvt*color15:          white
 
 URxvt*depth:            32
 URxvt*background:	    [85]#1c041b
+!URxvt*blurRadius:       128:128
 !URxvt*background:	    [85]#0e090c	600f5d
 URxvt*foreground:	    #ffffff
 

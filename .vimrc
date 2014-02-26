@@ -1,7 +1,7 @@
 " author: jupiter
 " last modified 2013/07/24
 
-" general 
+" general
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -12,7 +12,7 @@ set hlsearch
 syntax on
 
 " solarized color scheme
-set background=dark
+set background=light
 colorscheme solarized
 
 " search
@@ -41,6 +41,12 @@ nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
+" tab shortcuts
+nmap tn :tabn
+nmap tp :tabp
+nmap tbn :tabnew
+nmap tbc :tabclose
+
 set splitbelow
 set splitright
 
@@ -52,7 +58,7 @@ inoremap <Left>  <NOP>
 inoremap <Right> <NOP>
 inoremap <Up>	<NOP>
 inoremap <Down>	<NOP>
-  
+
 execute pathogen#infect()
 execute pathogen#helptags()
 
@@ -68,6 +74,9 @@ if has('cscope')
 	command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
 endif
 
+" delete spaces at end of lines
+command Delsp :%s/\s\+$//
+
 " Tag List
 command Tlo :TlistOpen
 command Clo :TlistClose
@@ -79,10 +88,10 @@ nmap tlc :TlistClose
 nmap tlt :TlistToggle
 
 " Make commands
-command Mbi :make && ! sudo make install
-command Mci :make && make clean && sudo make install
-nmap mbi :make && ! sudo make install
-nmap mci :make clean && make && sudo make install
+command Mbi :make && ! make install
+command Mci :make && make clean && make install
+nmap mbi :make && ! make install
+nmap mci :make clean && make && make install
 
 nmap ma :make all
-nmap mb :make build
+nmap mb :make target
